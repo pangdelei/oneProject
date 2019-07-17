@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     listLeft () {
-      this.$router.back()
+      this.$router.push({ path: '/select'})
     },
     getBookinfo (id) {
       this.$router.push({ path: '/bookinfo/' + id })

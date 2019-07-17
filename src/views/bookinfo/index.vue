@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     infoLeft () {
-      this.$router.back()
+      this.$router.push( {path: '/booklist'})
     },
     reader (id) { 
       this.$router.push({ path: '/booktext/' + id + '/' + this.cid})
