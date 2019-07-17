@@ -28,7 +28,7 @@ export default new Router({
       }
     },
     {
-      path: '/booktext/:id',
+      path: '/booktext/:id/:id',
       name: 'booktext',
       components: {
         default: () => import('./views/booktext/index.vue')

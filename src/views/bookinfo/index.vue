@@ -97,8 +97,8 @@ export default {
     infoLeft () {
       this.$router.back()
     },
-    reader (id) {
-      this.$router.push({ path: '/booktext/' + id })
+    reader (id) { 
+      this.$router.push({ path: '/booktext/' + id + '/' + this.cid})
     },
     jieshao () {
       this.flags = !this.flags
@@ -113,6 +113,8 @@ export default {
       this.props = data[0]
       // console.log(props)
       this.id = data[0].bookInfo.bookId
+      this.cid = data[0].chapterInfo[0].chapterId
+      // console.log(this.cid)
       this.bookName = data[0].bookInfo.bookName
       this.authorName = data[0].bookInfo.authorName
       this.chanName = data[0].bookInfo.chanName

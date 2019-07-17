@@ -3,12 +3,15 @@
     <div class="shuming">
 
     </div>
-    <div class="content" v-for="(itm, idx) of text" :key="idx">
+    <div class="content">
       <div class="biaoti">
-        {{ itm.chapterName }}
+        {{ text.chapterName }}
       </div>
-      <div class="zhengwen" v-html="itm.content" @click="tcyincang">
-        {{ itm.content }}
+      <div class="zhengwen" v-html="text.content" @click="tcyincang">
+        {{ text.content }}
+      </div>
+      <div class="jiazai">
+        加载下一章
       </div>
     </div>
     <div class="tanchuang">
@@ -102,9 +105,9 @@ export default {
   },
   mounted () {
     const { $route: { params: { id } } } = this
-    // console.log(id)
-    fetch('http://10.11.56.155:3000/api/books/list?bookInfo.bookId=' + id).then(res => res.json()).then(data => {
-      this.text = data[0].chapterInfo
+    console.log(id)
+    fetch('http://10.11.56.155:3000/api/books/list?chapterInfo.chapterId=' + id).then(res => res.json()).then(data => {
+      this.text = data[0]
       this.pro = data[0]
       console.log(this.text)
     })
@@ -113,10 +116,20 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/lib/reset.scss';
+.jiazai{
+  @include rect(100%, 0.4rem);
+  @include background-color(#ED424B);
+  border-radius: 1rem;
+  @include flexbox();
+  @include justify-content();
+  @include align-items();
+  @include color(#fff);
+}
 .content{
   // overflow: auto;
   @include rect(100%, auto);
 }
+
 .container{
   overflow: auto;
   @include background-color(#D5C19C);
