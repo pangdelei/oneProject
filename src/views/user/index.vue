@@ -11,6 +11,10 @@
     </header>
     <div class="content">
       <router-view></router-view>
+      <div class="vip">
+        <span>开通会员</span>
+        <span>享免费书库等10项福利</span>
+      </div>
       <div class="user-cen">
         <ul>
           <li>
@@ -39,6 +43,45 @@
           <li>
             <i class="iconfont icon-huizhanghuiyuan"></i>
             <span>徽章/称号</span>
+          </li>
+        </ul>
+      </div>
+      <div class="user-last">
+        <ul>
+          <li>
+            <div class="userl-left">
+              <i class="iconfont icon-shu1"></i>
+              <span>新书投资</span>
+            </div>
+            <i class="iconfont icon-right"></i>
+          </li>
+          <li>
+            <div class="userl-left">
+              <i class="iconfont icon-youxi"></i>
+              <span>我的游戏</span>
+            </div>
+            <i class="iconfont icon-right"></i>
+          </li>
+          <li>
+            <div class="userl-left">
+              <i class="iconfont icon-jinbi"></i>
+              <span>领币</span>
+            </div>
+            <i class="iconfont icon-right"></i>
+          </li>
+          <li>
+            <div class="userl-left">
+              <i class="iconfont icon-jifen"></i>
+              <span>积分商城</span>
+            </div>
+            <i class="iconfont icon-right"></i>
+          </li>
+          <li>
+            <div class="userl-left">
+              <i class="iconfont icon-gangbi"></i>
+              <span>成为作家</span>
+            </div>
+            <i class="iconfont icon-right"></i>
           </li>
         </ul>
       </div>
@@ -109,6 +152,19 @@ export default {
     }
   }
 }
+.vip{
+  @include rect(auto, 0.4rem);
+  @include background-color(#F65551);
+  @include flexbox();
+  @include justify-content(space-between);
+  @include align-items();
+  @include margin(0 0.2rem 0 0.2rem);
+  @include padding(0 0.1rem);
+  border-radius: 0.2rem 0.2rem 0 0;
+  span{
+    @include color(#fff);
+  }
+}
 .content{
   @include background-color(#F7F7FA);
 }
@@ -117,7 +173,7 @@ export default {
   @include flexbox();
   @include flex-direction(column);
   @include background-color(#fff);
-  @include margin(0.1rem 0 0 0);
+  // @include margin(0.1rem 0 0 0);
   ul{
     @include rect(100%, 0.7rem);
     @include flexbox();
@@ -132,5 +188,24 @@ export default {
       }
     }
   }
+}
+.user-last{
+  @include rect(100%, auto);
+  @include margin(0.1rem 0 0 0);
+  @include background-color(#fff);
+  ul{
+    @include rect(100%, auto);
+    li{
+      @include flexbox();
+      @include justify-content(space-between);
+      @include align-items();
+      @include padding(0 0.2rem);
+      @include rect(100%,0.4rem)
+
+    }
+  }
+}
+.userl-left i{
+  @include margin(0 0.1rem 0 0);
 }
 </style>

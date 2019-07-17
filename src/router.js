@@ -21,14 +21,14 @@ export default new Router({
       }
     },
     {
-      path: '/bookinfo',
+      path: '/bookinfo/:id',
       name: 'bookinfo',
       components: {
         default: () => import('./views/bookinfo/index.vue')
       }
     },
     {
-      path: '/booktext',
+      path: '/booktext/:id',
       name: 'booktext',
       components: {
         default: () => import('./views/booktext/index.vue')

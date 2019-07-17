@@ -27,18 +27,20 @@
       </van-sidebar>
       <div class="listbook">
         <ul>
-          <router-link to="/bookinfo" tag="li">
-            <img src="//bookcover.yuewen.com/qdbimg/349573/1012237441/150" alt="">
+          <li v-for="(item, index) of props" @click="getBookinfo(item.bookInfo.bookId)" :key="index">
+            <img :src="item.bookInfo.img" alt="">
             <div class="bookinfo">
-              <h1>书名</h1>
+              <h1>{{ item.bookInfo.bookName }}</h1>
               <div class="binfo">
-                <span>作者</span> ·
-                <span>类型</span> ·
-                <span>字数</span>
-                <span>月票</span>
+                <div class="binfo-left">
+                  <span>{{ item.bookInfo.authorName }}</span>·
+                  <span>{{ item.bookInfo.chanName }}</span>·
+                  <span>{{ item.bookInfo.showWordsCnt }}</span>
+                </div>
+                <span>{{ item.bookInfo.collect }}</span>
               </div>
             </div>
-          </router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -46,20 +48,32 @@
 </template>
 <script>
 import Vue from 'vue'
-import { NavBar, Sidebar, SidebarItem } from 'vant'
+import { NavBar, Sidebar, SidebarItem, List, PullRefresh } from 'vant'
 Vue.use(NavBar)
 Vue.use(Sidebar)
 Vue.use(SidebarItem)
+Vue.use(List)
+Vue.use(PullRefresh)
 export default {
   data () {
     return {
-      activeKey: 0
+      activeKey: 0,
+      props: [ { bookInfo: '' } ]
     }
   },
   methods: {
     listLeft () {
       this.$router.back()
+    },
+    getBookinfo (id) {
+      this.$router.push({ path: '/bookinfo/' + id })
     }
+  },
+  mounted () {
+    fetch('http://10.11.56.155:3000/api/books').then(res => res.json()).then(data => {
+      console.log(data)
+      this.props = data
+    })
   }
 }
 </script>
@@ -102,12 +116,13 @@ export default {
       @include justify-content();
       @include align-items();
       img{
+        @include display(block);
         @include rect(0.6rem, 0.8rem);
       }
       .bookinfo{
         @include rect(100%, 0.8rem);
         @include padding(0.1rem 0 0 0);
-        @include margin(0.2rem 0.2rem 0.2rem 0.1rem);
+        @include margin(0.2rem 0.1rem 0.2rem 0.1rem);
         @include border(0 0 1px 0,#ededed,solid);
         h1{
           @include font-size(16px);
@@ -116,8 +131,17 @@ export default {
         .binfo{
           @include color(#838A96);
           @include font-size(12px);
-          span:nth-child(4){
-            float: right;
+          @include flexbox();
+          @include justify-content(space-between);
+          @include align-items();
+          // @include line-height(0.2rem);
+          .binfo-left{
+            span:nth-child(1){
+              @include display(inline-block);
+              // text-overflow :ellipsis;
+              @include rect(0.24rem,0.14rem);
+              @include overflow(hidden);
+            }
           }
         }
       }

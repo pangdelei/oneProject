@@ -98,10 +98,10 @@ export default {
 @import '@/lib/reset.scss';
 .headerS{
   @include flexbox();
-  @include padding(0.1rem 0);
+  @include padding(0.09rem 0);
 }
 .header-left{
-  @include rect(1.2rem, 0.44rem);
+  @include rect(1.2rem, 0.26rem);
   @include padding(0 0 0 0.16rem);
   h1{
    @include font-size(16px);
