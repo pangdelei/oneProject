@@ -95,10 +95,10 @@ export default {
   },
   methods: {
     infoLeft () {
-      this.$router.push( {path: '/booklist'})
+      this.$router.push({ path: '/booklist' })
     },
-    reader (id) { 
-      this.$router.push({ path: '/booktext/' + id + '/' + this.cid})
+    reader (id) {
+      this.$router.push({ path: '/booktext/' + id + '/' + this.cid })
     },
     jieshao () {
       this.flags = !this.flags
@@ -108,7 +108,7 @@ export default {
   mounted () {
     const { $route: { params: { id } } } = this
     // console.log(id)
-    fetch('http://10.11.56.155:3000/api/books/list?bookInfo.bookId=' + id).then(res => res.json()).then(data => {
+    fetch('http://10.11.56.181:3000/api/books/list?bookInfo.bookId=' + id).then(res => res.json()).then(data => {
       console.log(data[0])
       this.props = data[0]
       // console.log(props)

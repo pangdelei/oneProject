@@ -45,7 +45,7 @@
         </div>
         <div class="ml-zw">
           <ul>
-            <li v-for="(item, index) of pro" :key="index" @click="mulu(item.chapterId)" >{{ item.chapterName }}{{ index }} </li>
+            <li v-for="(item, index) of pro" :key="index" @click="mulu(item.chapterId)" >{{ item.chapterName }}</li>
           </ul>
         </div>
       </div>
@@ -81,8 +81,7 @@ export default {
       value: 1,
       text: [],
       pro: [],
-      bid:[],
-      all:[]
+      bid: []
     }
   },
   methods: {
@@ -113,13 +112,14 @@ export default {
   },
   mounted () {
     const { $route: { params: { id } } } = this
-    // console.log(id)
-    fetch('http://10.11.56.155:3000/api/books/list?chapterInfo.chapterId=' + id).then(res => res.json()).then(data => {
+    console.log(id)
+    fetch('http://10.11.56.181:3000/api/books/find?chapterId=' + id).then(res => res.json()).then(data => {
       this.text = data[0].chapterInfo[0]
+      console.log(this.text)
+    })
+    fetch('http://10.11.56.181:3000/api/books/list?chapterInfo.chapterId=' + id).then(res => res.json()).then(data => {
       this.pro = data[0].chapterInfo
       this.bid = data[0].bookInfo.bookId
-      this.all = data[0]
-      console.log(this.text)
       console.log(this.pro)
     })
   }

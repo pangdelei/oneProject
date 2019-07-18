@@ -63,14 +63,14 @@ export default {
   },
   methods: {
     listLeft () {
-      this.$router.push({ path: '/select'})
+      this.$router.push({ path: '/select' })
     },
     getBookinfo (id) {
       this.$router.push({ path: '/bookinfo/' + id })
     }
   },
   mounted () {
-    fetch('http://10.11.56.155:3000/api/books').then(res => res.json()).then(data => {
+    fetch('http://10.11.56.181:3000/api/books').then(res => res.json()).then(data => {
       console.log(data)
       this.props = data
     })
