@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="bookinfo-last">
-      <span>加入书架</span>
+      <span @click="add(id)">加入书架</span>
       <span>批量订阅</span>
       <span @click="reader(id)">立即阅读</span>
     </div>
@@ -90,12 +90,15 @@ export default {
       props: [ { bookInfo: '' } ],
       flags: true,
       introduce: 'introduce',
-      introduces: 'introduces'
+      introduces: 'introduces',
+      pro: [],
+      prolist: []
     }
   },
   methods: {
     infoLeft () {
-      this.$router.push({ path: '/booklist' })
+      // this.$router.push({ path: '/booklist' })
+      this.$router.back()
     },
     reader (id) {
       this.$router.push({ path: '/booktext/' + id + '/' + this.cid })
@@ -103,12 +106,24 @@ export default {
     jieshao () {
       this.flags = !this.flags
       console.log('222')
+    },
+    add (id) {
+      this.prolist = [{ bookInfo: {
+          bookName: this.bookName,
+          authorName: this.authorName,
+          bookId: id
+      } }]
+      console.log(this.prolist)
+      fetch('http://localhost:3000/api/books/list?bookInfo.bookId=' + this.prolist).then(res => res.json()).then(data => {
+        this.pro = data
+        console.log(this.pro)
+      })
     }
   },
   mounted () {
     const { $route: { params: { id } } } = this
     // console.log(id)
-    fetch('http://10.11.56.181:3000/api/books/list?bookInfo.bookId=' + id).then(res => res.json()).then(data => {
+    fetch('http://localhost:3000/api/books/list?bookInfo.bookId=' + id).then(res => res.json()).then(data => {
       console.log(data[0])
       this.props = data[0]
       // console.log(props)
@@ -143,6 +158,7 @@ export default {
   @include rect(100%, 2.3rem);
   // @include background-color(red);
   background-color: rgba(0,0,0,0.1);
+  background:url("../../assets/3.png");
   img{
     @include display(block);
     @include rect(1rem, 1.2rem);

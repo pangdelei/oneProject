@@ -2,7 +2,7 @@
   <div class="container">
     <header class="headerb">
       <van-nav-bar
-        title="排行·男生全部"
+        title="排行·全部"
         left-text=""
         right-text=""
         left-arrow
@@ -11,19 +11,19 @@
     </header>
     <div class="content">
       <van-sidebar v-model="activeKey">
-        <van-sidebar-item title="月票榜" />
-        <van-sidebar-item title="畅销榜" />
-        <van-sidebar-item title="粉丝榜" />
-        <van-sidebar-item title="推荐榜" />
-        <van-sidebar-item title="打赏榜" />
-        <van-sidebar-item title="更新榜" />
-        <van-sidebar-item title="签约榜" />
-        <van-sidebar-item title="新书榜" />
-        <van-sidebar-item title="新人榜" />
-        <van-sidebar-item title="红包榜" />
-        <van-sidebar-item title="书单榜" />
-        <van-sidebar-item title="角色榜" />
-        <van-sidebar-item title="名作堂" />
+        <van-sidebar-item title="月票榜" @click="getbang('ticket')"/>
+        <van-sidebar-item title="畅销榜" @click="getbang('bestseller')"/>
+        <van-sidebar-item title="粉丝榜" @click="getbang('fans')"/>
+        <van-sidebar-item title="推荐榜" @click="getbang('recommend')"/>
+        <van-sidebar-item title="打赏榜" @click="getbang('give')"/>
+        <van-sidebar-item title="更新榜" @click="getbang('update')"/>
+        <van-sidebar-item title="签约榜" @click="getbang('sign')"/>
+        <van-sidebar-item title="新书榜" @click="getbang('newbook')"/>
+        <van-sidebar-item title="新人榜" @click="getbang('rookie')"/>
+        <van-sidebar-item title="红包榜" @click="getbang('redpacket')"/>
+        <van-sidebar-item title="书单榜" @click="getbang('booklist')"/>
+        <van-sidebar-item title="角色榜" @click="getbang('role')"/>
+        <van-sidebar-item title="名作堂" @click="getbang('masterwork')"/>
       </van-sidebar>
       <div class="listbook">
         <ul>
@@ -37,7 +37,7 @@
                   <span>{{ item.bookInfo.chanName }}</span>·
                   <span>{{ item.bookInfo.showWordsCnt }}</span>
                 </div>
-                <span>{{ item.bookInfo.collect }}</span>
+                <!-- <span>{{ item.bookInfo.collect }}</span> -->
               </div>
             </div>
           </li>
@@ -58,7 +58,8 @@ export default {
   data () {
     return {
       activeKey: 0,
-      props: [ { bookInfo: '' } ]
+      props: [ { bookInfo: '' } ],
+      all: []
     }
   },
   methods: {
@@ -67,11 +68,19 @@ export default {
     },
     getBookinfo (id) {
       this.$router.push({ path: '/bookinfo/' + id })
+    },
+    getbang (bang) {
+      fetch('http://localhost:3000/api/books/' + bang).then(res => res.json()).then(data => {
+      // this.all = data[0].bookInfo
+      // console.log(this.all)
+        this.props = data
+        console.log(this.props)
+      })
     }
   },
   mounted () {
-    fetch('http://10.11.56.181:3000/api/books').then(res => res.json()).then(data => {
-      console.log(data)
+    fetch('http://localhost:3000/api/books/ticket').then(res => res.json()).then(data => {
+      // console.log(data)
       this.props = data
     })
   }

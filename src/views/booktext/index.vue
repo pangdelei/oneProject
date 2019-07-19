@@ -81,9 +81,11 @@ export default {
       value: 1,
       text: [],
       pro: [],
-      bid: []
+      bid: [],
+      next: []
     }
   },
+  inject: ['reload'],
   methods: {
     tcyincang () {
       this.flag = !this.flag
@@ -92,7 +94,8 @@ export default {
       this.szzt = !this.szzt
     },
     textback () {
-      this.$router.push({ path: '/bookinfo/' + this.bid })
+      // this.$router.replace({ path: '/bookinfo/' + this.bid })
+      this.$router.back()
     },
     yejian () {
       this.flags = !this.flags
@@ -101,26 +104,31 @@ export default {
       this.show = true
     },
     mulu (id) {
-      this.$router.push({ path: '/booktext/' + this.bid + '/' + id })
+      this.$router.replace({ path: '/booktext/' + this.bid + '/' + id })
+      this.reload()
     },
     jiazai () {
-    //  for(var i = 0;i<9;i++){
-    //    console.log(i)
-    //    this.text = this.all.chapterInfo[i]
-    //  }
+      this.$router.replace({ path: '/booktext/' + this.bid + '/' + this.nextid })
+      this.reload()
+      // fetch('http://10.11.56.181:3000/api/books/find?chapterId=' + this.nextid).then(res => res.json()).then(data => {
+      //   this.text = data[0].chapterInfo[0]
+      //   // this.nextid = data[0].chapterInfo[0].next
+      //   // console.log(this.nextid)
+      // })
     }
   },
   mounted () {
     const { $route: { params: { id } } } = this
-    console.log(id)
-    fetch('http://10.11.56.181:3000/api/books/find?chapterId=' + id).then(res => res.json()).then(data => {
+    // console.log(id)
+    fetch('http://localhost:3000/api/books/find?chapterId=' + id).then(res => res.json()).then(data => {
       this.text = data[0].chapterInfo[0]
-      console.log(this.text)
+      this.nextid = data[0].chapterInfo[0].next
+      // console.log(this.nextid)
     })
-    fetch('http://10.11.56.181:3000/api/books/list?chapterInfo.chapterId=' + id).then(res => res.json()).then(data => {
+    fetch('http://localhost:3000/api/books/list?chapterInfo.chapterId=' + id).then(res => res.json()).then(data => {
       this.pro = data[0].chapterInfo
       this.bid = data[0].bookInfo.bookId
-      console.log(this.pro)
+      // console.log(this.pro)
     })
   }
 }
@@ -157,8 +165,10 @@ export default {
   .zhengwen{
     @include padding(0.2rem);
     @include rect(100%, auto);
-    // @include overflow(auto);
-    // overflow: auto;
+    @include font-size(16px);
+    // p{
+    //   // @include font-size(16px);
+    // }
   }
   .tc-top{
     position:absolute;
