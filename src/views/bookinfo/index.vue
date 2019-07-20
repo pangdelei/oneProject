@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="bookinfo-last">
-      <span @click="add(id)">加入书架</span>
+      <span @click="add(id)"> {{ jrcase }} </span>
       <span>批量订阅</span>
       <span @click="reader(id)">立即阅读</span>
     </div>
@@ -93,7 +93,8 @@ export default {
       introduces: 'introduces',
       pro: [],
       prolist: {},
-      pp: []
+      pp: [],
+      jrcase: '加入书架'
     }
   },
   methods: {
@@ -112,18 +113,13 @@ export default {
       this.prolist = {
         bookName: this.bookName,
         authorName: this.authorName,
-        bookId: id
+        bookId: id,
+        intro: this.intro,
+        img: this.img
       }
-      console.log(this.prolist)
-      fetch('http://10.11.56.214:3000/api/book/insert?bookInfo=' + this.prolist).then(res => res.json()).then(data => {
-        // this.pro = data
-        // console.log(this.pro)
-      })
-      // var { $route: { params: { id } } } = this
-      // fetch('http://10.11.56.214:3000/api/books/findbook?' + id).then(res => res.json()).then(data => {
-      //   this.pp = data
-      //   console.log(this.pp)
-      // })
+      // console.log(this.prolist)
+      this.jrcase = '已在书架'
+      this.$store.commit('bookCase', this.prolist)
     }
   },
   mounted () {

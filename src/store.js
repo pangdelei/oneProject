@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     loginName: '',
-    loginState: ''
+    loginState: '',
+    bookcase: ''
   },
   mutations: {
     changeLoginName (state, data) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     changeLoginState (state, data) {
       state.loginState = data
+    },
+    bookCase (state, data) {
+      state.bookcase = data
     }
   },
   actions: {

@@ -4,27 +4,49 @@
       <h1>书架</h1>
       <span class="iconfont icon-sousuo"></span>
     </header>
-    <div class="content">
+    <div class="content" v-if= "bookcase != '' ">
       <ul class="shu">
-        <li>
-          <img src="https://bookcover.yuewen.com/qdbimg/349573/1015249502/300" alt="">
+        <li @click='getcase'>
+          <img :src="bookcase.img" alt="">
           <div class="jies">
-            <h2>我以妖格担保</h2>
-            <span>公天下</span>
-            <p>开局一条蛇，进化全靠吃，迟早有一天，我要变成巨蟒。</p>
+            <h2>{{bookcase.bookName}}</h2>
+            <span>{{bookcase.authorName}}</span>
+            <p>{{ bookcase.intro }}</p>
           </div>
         </li>
       </ul>
     </div>
+    <div class="content kong" v-else>
+      书架空空如也
+    </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
-
+  computed: {
+    ...mapState({
+      bookcase (state) {
+        return state.bookcase
+      }
+    })
+  },
+  methods: {
+    getcase () {
+      this.$router.push('/bookinfo/' + this.bookcase.bookId)
+    }
+  },
 }
 </script>
 <style lang="scss" scoped>
 @import '@/lib/reset.scss';
+.kong{
+  @include font-size(16px);
+  @include color(#F14B4E);
+  @include flexbox();
+  @include justify-content();
+  @include align-items();
+}
 .headerS{
   @include rect(100%, 0.444rem);
   @include flexbox();
