@@ -207,6 +207,7 @@ export default {
 }
 // 夜间模式
 .containers{
+  overflow: auto;
   @include background-color(#0D0C0D);
   @include rect(100%, 100%);
   .shuming{
