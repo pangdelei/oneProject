@@ -70,7 +70,7 @@ export default {
       this.$router.push({ path: '/bookinfo/' + id })
     },
     getbang (bang) {
-      fetch('http://localhost:3000/api/books/' + bang).then(res => res.json()).then(data => {
+      fetch('http://39.100.152.70:3000/api/books/' + bang).then(res => res.json()).then(data => {
       // this.all = data[0].bookInfo
       // console.log(this.all)
         this.props = data
@@ -79,7 +79,7 @@ export default {
     }
   },
   mounted () {
-    fetch('http://localhost:3000/api/books/ticket').then(res => res.json()).then(data => {
+    fetch('http://39.100.152.70:3000/api/books/ticket').then(res => res.json()).then(data => {
       // console.log(data)
       this.props = data
     })

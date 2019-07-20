@@ -33,11 +33,11 @@
         </ul>
         <ul>
           <li>
-            <i class="iconfont icon-shu"></i>
+            <i class="iconfont icon-tuya"></i>
             <span>我的装扮</span>
           </li>
           <li>
-            <i class="iconfont icon-qiapian"></i>
+            <i class="iconfont icon-qiapai"></i>
             <span>我的卡牌</span>
           </li>
           <li>
@@ -89,7 +89,13 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
+  computed: {
+    ...mapState({
+      loginState: (state) => { return state.loginState }
+    })
+  },
   watch: {
     $route (newVal, oldVal) {
       const { $store: { state: { loginState } } } = this
@@ -103,28 +109,28 @@ export default {
     }
   },
   beforeRouteEnter (to, from, next) {
-    console.log(to.name)
-    if (to.name === 'user') {
-      if (localStorage.getItem('isLogin') === 'ok') {
-        next('/user/login')
-      } else {
-        next('/user/nologin')
-      }
-    } else {
-      next()
-    }
-    // next(vm => {
-    //   const { $store: { state: { loginState } } } = vm
-    //   if (to.name === 'user') {
-    //     if (loginState === 'ok') {
-    //       vm.$router.replace('/user/login')
-    //     } else {
-    //       vm.$router.replace('/user/nologin')
-    //     }
+    // console.log(to.name)
+    // if (to.name === 'user') {
+    //   if (localStorage.getItem('isLogin') === 'ok') {
+    //     next('/user/login')
     //   } else {
-    //     next()
+    //     next('/user/nologin')
     //   }
-    // })
+    // } else {
+    //   next()
+    // }
+    next(vm => {
+      const { $store: { state: { loginState } } } = vm
+      if (to.name === 'user') {
+        if (loginState === 'ok') {
+          vm.$router.replace('/user/login')
+        } else {
+          vm.$router.replace('/user/nologin')
+        }
+      } else {
+        next()
+      }
+    })
   }
 }
 </script>
@@ -139,8 +145,12 @@ export default {
   @include background-color(#F7F7FA);
   .headerU-left{
     @include flexbox();
+    @include align-items();
+    @include rect(80%, 0.44rem);
   }
   .headerU-right{
+    @include rect(30%, 0.44rem);
+    @include align-items();
     @include flexbox();
     .icon-yueliang{
       @include rect(0.45rem,0.24rem);
@@ -160,13 +170,15 @@ export default {
   @include align-items();
   @include margin(0 0.2rem 0 0.2rem);
   @include padding(0 0.1rem);
-  border-radius: 0.2rem 0.2rem 0 0;
+  border-radius: 0.1rem 0.1rem 0 0;
   span{
-    @include color(#fff);
+    @include color(#FFE3B3);
+    @include font-size(12px);
   }
 }
 .content{
   @include background-color(#F7F7FA);
+  @include overflow(auto);
 }
 .user-cen{
   @include rect(100%, 1.4rem);

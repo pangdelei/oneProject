@@ -7,10 +7,11 @@
     <div class="content">
       <ul class="shu">
         <li>
-          <img src="http://bookcover.yuewen.com/qdbimg/349573/1012237441/150" alt="">
+          <img src="https://bookcover.yuewen.com/qdbimg/349573/1015249502/300" alt="">
           <div class="jies">
-            <h2>全球高武</h2>
-            <span>作者</span>
+            <h2>我以妖格担保</h2>
+            <span>公天下</span>
+            <p>开局一条蛇，进化全靠吃，迟早有一天，我要变成巨蟒。</p>
           </div>
         </li>
       </ul>
@@ -53,13 +54,18 @@ export default {
     }
     .jies{
       @include rect(100%, 0.9rem);
-      @include padding(0.05rem 0 0.2rem 0.1rem);
+      @include padding(0.05rem 0.2rem 0 0.1rem);
       h2{
         @include font-size(16px);
 
       }
       span{
         @include color(#838A96);
+      }
+      p{
+        @include font-size(12px);
+        @include rect(100%, 0.35rem);
+        @include overflow(hidden);
       }
     }
   }

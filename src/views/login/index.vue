@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div class="bg">
+      <a href="javascript:;"><img src="https://sta.gtimg.com/mobile/static/images/top_red_13.png" alt=""></a>
+    </div>
     <van-nav-bar
         title="登录"
         left-text=""
@@ -9,6 +12,9 @@
         @click-right="onClickRight"
       />
     <div class="content">
+      <div class="logo">
+        <img src="https://sta.gtimg.com/mobile/static/images/qd_icon.png" alt="">
+      </div>
       <van-cell-group>
         <van-field
           v-model="username"
@@ -116,8 +122,9 @@ export default {
         console.log(data)
         if (data === 1) {
           Toast('登录成功')
-          localStorage.setItem('isLogin', 'ok')
-          // this.$store.commit('changeLoginState', 'ok')
+          // localStorage.setItem('isLogin', 'ok')
+          this.$store.commit('changeLoginName', this.username)
+          this.$store.commit('changeLoginState', 'ok')
           this.$router.back()
         } else if (data === 2) {
           Dialog.confirm({
@@ -139,5 +146,27 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
+@import '@/lib/reset.scss';
+.bg{
+  @include rect(100%, 0.68rem);
+  img{
+    @include rect(100%, 0.68rem);
+  }
+}
+.logo{
+  @include rect(100%, 0.8rem);
+  @include padding(0.2rem 0);
+  img{
+    @include rect(0.4rem,0.4rem);
+    @include display(block);
+    @include margin(0 auto);
+  }
+}
+.van-button{
+  @include color(#fff);
+  @include background-color(#F57F83);
+  border-color:#F57F83;
+  border-radius: 0.2rem;
+}
 </style>

@@ -120,12 +120,12 @@ export default {
   mounted () {
     const { $route: { params: { id } } } = this
     // console.log(id)
-    fetch('http://localhost:3000/api/books/find?chapterId=' + id).then(res => res.json()).then(data => {
+    fetch('http://39.100.152.70:3000/api/books/find?chapterId=' + id).then(res => res.json()).then(data => {
       this.text = data[0].chapterInfo[0]
       this.nextid = data[0].chapterInfo[0].next
       // console.log(this.nextid)
     })
-    fetch('http://localhost:3000/api/books/list?chapterInfo.chapterId=' + id).then(res => res.json()).then(data => {
+    fetch('http://39.100.152.70:3000/api/books/list?chapterInfo.chapterId=' + id).then(res => res.json()).then(data => {
       this.pro = data[0].chapterInfo
       this.bid = data[0].bookInfo.bookId
       // console.log(this.pro)

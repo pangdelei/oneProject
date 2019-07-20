@@ -84,7 +84,7 @@ export default {
       this.$router.push('/bookinfo/' + id)
     },
     man () {
-      fetch('http://localhost:3000/api/books/man').then(res => res.json()).then(data => {
+      fetch('http://39.100.152.70:3000/api/books/man').then(res => res.json()).then(data => {
         this.select = data
       })
       // fetch('http://10.11.56.181:3000/api/books/imgboy').then(res => res.json()).then(data => {
@@ -93,7 +93,7 @@ export default {
       this.flag = !this.flag
     },
     girl () {
-      fetch('http://localhost:3000/api/books/girl').then(res => res.json()).then(data => {
+      fetch('http://39.100.152.70:3000/api/books/girl').then(res => res.json()).then(data => {
         this.select = data
       })
       // fetch('http://10.11.56.181:3000/api/books/imggirl').then(res => res.json()).then(data => {
@@ -103,10 +103,10 @@ export default {
     }
   },
   mounted () {
-    fetch('http://localhost:3000/api/books/imggirl').then(res => res.json()).then(data => {
+    fetch('http://39.100.152.70:3000/api/books/imggirl').then(res => res.json()).then(data => {
       this.bannerlist = data
     })
-    fetch('http://localhost:3000/api/books/man').then(res => res.json()).then(data => {
+    fetch('http://39.100.152.70:3000/api/books/man').then(res => res.json()).then(data => {
       this.select = data
       // this.getId = data[0].bookInfo.bookId
       // console.log(this.select)

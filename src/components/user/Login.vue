@@ -1,13 +1,35 @@
 <template>
   <div class="user">
     <div class="user-top">
-      <img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1563178678&di=0382de188d14ba4bf3407ce47437b629&src=http://hbimg.b0.upaiyun.com/69ad7a731f43d4b8729f1a2fbe65c43801ca0f033250-EV1vMf_fw658" alt="">
+      <img src="../../assets/1.jpg" alt="">
       <div class="username">
-        <span>用户名</span>
+        <span>欢迎你{{loginName}}</span>
       </div>
     </div>
   </div>
 </template>
+<script>
+import { mapState } from 'vuex'
+export default {
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      const { $store: { state: { loginState } } } = vm
+      if (loginState === 'ok') {
+        next()
+      } else {
+        next('/user/nologin')
+      }
+    })
+  },
+  computed: {
+    ...mapState({
+      loginName (state) {
+        return state.loginName
+      }
+    })
+  }
+}
+</script>
 <style lang="scss" scoped>
 @import '@/lib/reset.scss';
 .user{
@@ -15,11 +37,14 @@
   @include background-color(#fff);
   @include flexbox();
   @include flex-direction(column);
+  // @include align-items();
+  @include justify-content();
   @include margin(0 0.2rem 0 0.2rem);
   @include padding(0.1rem);
   border-radius: 0.2rem 0.2rem 0 0;
   .user-top{
     @include flexbox();
+
     img{
       @include rect(0.5rem, 0.5rem);
       border-radius: 50%;

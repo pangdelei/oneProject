@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div class="bg">
+      <a href="javascript:;"><img src="https://sta.gtimg.com/mobile/static/images/top_red_13.png" alt=""></a>
+    </div>
     <van-nav-bar
         title="注册"
         left-text=""
@@ -40,7 +43,7 @@
           <van-button @click="sendCode" slot="button" size="small" type="primary">发送验证码</van-button>
         </van-field>
       </van-cell-group>
-      <van-button type="primary" size="normal" @click="register" :block="true">注册</van-button>
+      <van-button style="color:#fff;" type="primary" size="normal" @click="register" :block="true">注册</van-button>
     </div>
   </div>
 </template>
@@ -163,5 +166,17 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
+@import '@/lib/reset.scss';
+.bg{
+  @include rect(100%, 0.68rem);
+  img{
+    @include rect(100%, 0.68rem);
+  }
+}
+.van-button{
+  @include background-color(#D3E6FE);
+  border-color:#D3E6FE;
+  border-radius: 0.2rem;
+}
 </style>

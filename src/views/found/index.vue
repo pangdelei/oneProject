@@ -32,15 +32,14 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 <script>
 import Vue from 'vue'
-import { Search } from 'vant';
-Vue.use(Search);
+import { Search } from 'vant'
+Vue.use(Search)
 export default {
-  data() {
+  data () {
     return {
       search: '',
       sear: []
@@ -49,12 +48,10 @@ export default {
   methods: {
     onSearch () {
       var search = this.search
-      console.log(search)
-      fetch('http://localhost:3000/api/books/cname?bookName=' + search).then(res => res.json()).then(data => {
+      fetch('http://39.100.152.70:3000/api/books/cname?bookName=' + search).then(res => res.json()).then(data => {
         this.sear = data
-        console.log(this.sear)
       })
-    } 
+    }
   }
 }
 </script>

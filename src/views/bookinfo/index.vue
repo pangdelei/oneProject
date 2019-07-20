@@ -92,7 +92,8 @@ export default {
       introduce: 'introduce',
       introduces: 'introduces',
       pro: [],
-      prolist: []
+      prolist: {},
+      pp: []
     }
   },
   methods: {
@@ -108,22 +109,27 @@ export default {
       console.log('222')
     },
     add (id) {
-      this.prolist = [{ bookInfo: {
-          bookName: this.bookName,
-          authorName: this.authorName,
-          bookId: id
-      } }]
+      this.prolist = {
+        bookName: this.bookName,
+        authorName: this.authorName,
+        bookId: id
+      }
       console.log(this.prolist)
-      fetch('http://localhost:3000/api/books/list?bookInfo.bookId=' + this.prolist).then(res => res.json()).then(data => {
-        this.pro = data
-        console.log(this.pro)
+      fetch('http://10.11.56.214:3000/api/book/insert?bookInfo=' + this.prolist).then(res => res.json()).then(data => {
+        // this.pro = data
+        // console.log(this.pro)
       })
+      // var { $route: { params: { id } } } = this
+      // fetch('http://10.11.56.214:3000/api/books/findbook?' + id).then(res => res.json()).then(data => {
+      //   this.pp = data
+      //   console.log(this.pp)
+      // })
     }
   },
   mounted () {
     const { $route: { params: { id } } } = this
     // console.log(id)
-    fetch('http://localhost:3000/api/books/list?bookInfo.bookId=' + id).then(res => res.json()).then(data => {
+    fetch('http://39.100.152.70:3000/api/books/list?bookInfo.bookId=' + id).then(res => res.json()).then(data => {
       console.log(data[0])
       this.props = data[0]
       // console.log(props)
